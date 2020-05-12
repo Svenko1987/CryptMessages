@@ -9,7 +9,12 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class Decrypt {
     SecretKey secretKey;
-    private String decrypt(String data , String password) throws Exception{
+
+    public Decrypt() {
+
+    }
+
+    public String decrypt(String data , String password) throws Exception{
         this.secretKey= new SecretKey(password);
         SecretKeySpec keySpec = secretKey.getSecretKey();
         Cipher cipher = Cipher.getInstance("AES");

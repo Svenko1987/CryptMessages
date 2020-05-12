@@ -2,6 +2,7 @@ package com.example.cryptmessages.controls.textMethods;
 
 
 import android.util.Base64;
+import android.util.Log;
 
 import com.example.cryptmessages.data.SecretKey;
 
@@ -12,7 +13,11 @@ import javax.crypto.spec.SecretKeySpec;
 public class Encrypt {
     SecretKey secretKey;
 
-    private String encrypt(String data, String password) throws Exception {
+    public Encrypt() {
+
+    }
+
+    public String encrypt(String data, String password) throws Exception {
         this.secretKey = new SecretKey(password);
         SecretKeySpec keySpec = secretKey.getSecretKey();
         Cipher cipher = Cipher.getInstance("AES");
