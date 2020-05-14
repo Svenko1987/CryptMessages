@@ -16,6 +16,7 @@ public class Decrypt {
 
     public String decrypt(String data , String key) throws Exception{
         if (!key.equals("") && !data.equals("")) {
+
             this.secretKey= new SecretKey(key);
             SecretKeySpec keySpec = secretKey.getSecretKey();
             Cipher cipher = Cipher.getInstance("AES");

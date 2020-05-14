@@ -6,99 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/modeTv"
-        android:layout_width="141dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Quick Crypt"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/logoImg"
-        app:layout_constraintTop_toBottomOf="@+id/usernameTv" />
-
     <EditText
         android:id="@+id/keyTa"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
+        android:hint="secret key"
         android:inputType="textPassword"
         android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menuDv" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/adDv"
+        app:layout_constraintEnd_toStartOf="@+id/seeKeyBtn"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/encryptBtn"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:text="Encrypt"
-        app:layout_constraintBottom_toBottomOf="@id/adDv"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDv"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/decryptBtn"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="Decript"
         app:layout_constraintBaseline_toBaselineOf="@+id/encryptBtn"
-        app:layout_constraintStart_toEndOf="@+id/encryptBtn" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/clearBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Clear"
-        app:layout_constraintBaseline_toBaselineOf="@+id/decryptBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/decryptBtn" />
+        android:background="@android:drawable/ic_menu_delete"
+        app:layout_constraintBaseline_toBaselineOf="@+id/encryptBtn"
+        app:layout_constraintEnd_toStartOf="@+id/decryptBtn"
+        app:layout_constraintStart_toEndOf="@+id/encryptBtn" />
 
     <View
         android:id="@+id/menuDv"
         android:layout_width="395dp"
         android:layout_height="1dp"
-        android:layout_marginTop="128dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameTv" />
 
     <View
         android:id="@+id/buttonDv"
         android:layout_width="395dp"
         android:layout_height="1dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/decryptBtn"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42000002" />
 
     <Button
         android:id="@+id/copyBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@android:string/copy"
-        app:layout_constraintBaseline_toBaselineOf="@+id/keyTa"
-        app:layout_constraintStart_toEndOf="@+id/keyTa" />
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/actionModeCopyDrawable"
+        app:layout_constraintBottom_toTopOf="@+id/keyTa"
+        app:layout_constraintEnd_toStartOf="@+id/pasteBtn" />
 
     <Button
         android:id="@+id/pasteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@android:string/paste"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/actionModePasteDrawable"
         app:layout_constraintBaseline_toBaselineOf="@id/copyBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/copyBtn" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <View
         android:id="@+id/adDv"
@@ -111,7 +100,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/messageTa"
+        android:id="@+id/cipherTextTa"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -120,59 +109,53 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="Copy your ciphertext here..."
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@id/buttonDv"
+        app:layout_constraintBottom_toTopOf="@+id/copyBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/keyTa" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonDv" />
 
-    <ImageView
-        android:id="@+id/logoImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/plainTextTA"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@id/modeTv"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Enter your plain text here..."
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/encryptBtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:layout_constraintTop_toBottomOf="@+id/menuDv" />
 
     <TextView
         android:id="@+id/usernameTv"
         android:layout_width="141dp"
         android:layout_height="49dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Hi Username"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/logoImg"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/settingsBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/usernameTv"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_manage" />
-
     <Button
-        android:id="@+id/changeModeBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/seeKeyBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="8dp"
-        android:text="Change Mode"
+        android:background="@android:drawable/ic_menu_view"
+        app:layout_constraintBaseline_toBaselineOf="@+id/keyTa"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/modeTv"
-        app:layout_constraintTop_toBottomOf="@+id/settingsBtn" />
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toEndOf="@+id/keyTa" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,14 +17,14 @@ import com.example.cryptmessages.controls.cipherMethods.Encrypt;
 import com.example.cryptmessages.controls.editingButtons.Clipboard;
 
 public class MainActivity extends AppCompatActivity {
-    EditText keyTa, messageTa;
-    Button encryptBtn, decryptBtn, copyBtn, pasteBtn, clearBtn;
+    EditText keyTa, cipherTextTa,plainTextTa;
+    Button encryptBtn, decryptBtn, copyBtn, pasteBtn, clearBtn,seeKeyBtn;
 
     Decrypt decrypt = new Decrypt();
     Encrypt encrypt = new Encrypt();
-    Clipboard clipboard;
     private ClipboardManager clipboardManager;
     private ClipData clipData;
+    boolean vis=false;
 
 
 
@@ -32,13 +33,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        messageTa = findViewById(R.id.messageTa);
+        cipherTextTa = findViewById(R.id.cipherTextTa);
+        plainTextTa= findViewById(R.id.plainTextTA);
         keyTa = findViewById(R.id.keyTa);
         encryptBtn = findViewById(R.id.encryptBtn);
         decryptBtn = findViewById(R.id.decryptBtn);
         copyBtn = findViewById(R.id.copyBtn);
         pasteBtn = findViewById(R.id.pasteBtn);
         clearBtn = findViewById(R.id.clearBtn);
+        seeKeyBtn=findViewById(R.id.seeKeyBtn);
         clipboardManager = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
 
         encryptBtn.setOnClickListener(new View.OnClickListener() {
@@ -46,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
 
-                        String temp = messageTa.getText().toString();
-                        messageTa.setText(encrypt.encrypt(temp, keyTa.getText().toString()));
+                        String temp = plainTextTa.getText().toString();
+                        cipherTextTa.setText(encrypt.encrypt(temp, keyTa.getText().toString()));
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -59,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
 
-                    String temp = messageTa.getText().toString();
-                    messageTa.setText(decrypt.decrypt(temp, keyTa.getText().toString()));
+                    String temp = cipherTextTa.getText().toString();
+                    plainTextTa.setText(decrypt.decrypt(temp, keyTa.getText().toString()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         copyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String txtcopy = messageTa.getText().toString();
+                String txtcopy = cipherTextTa.getText().toString();
                 clipData = ClipData.newPlainText("text",txtcopy);
                 clipboardManager.setPrimaryClip(clipData);
                 Toast.makeText(getApplicationContext(),"Data Copied to Clipboard", Toast.LENGTH_SHORT).show();
@@ -81,15 +84,30 @@ public class MainActivity extends AppCompatActivity {
                 ClipData pData = clipboardManager.getPrimaryClip();
                 ClipData.Item item = pData.getItemAt(0);
                 String txtpaste = item.getText().toString();
-                messageTa.setText(txtpaste);
+                cipherTextTa.setText(txtpaste);
                 Toast.makeText(getApplicationContext(),"Data Pasted from Clipboard",Toast.LENGTH_SHORT).show();
             }
         });
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                messageTa.setText("");
-                keyTa.setText("");
+                cipherTextTa.setText(null);
+                plainTextTa.setText(null);
+                keyTa.setText(null);
+
+            }
+        });
+        seeKeyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!vis){
+                    keyTa.setTransformationMethod(null);
+                    vis=true;
+                }else{
+                    keyTa.setTransformationMethod(new PasswordTransformationMethod());
+                    vis=false;
+                }
+
             }
         });
 
