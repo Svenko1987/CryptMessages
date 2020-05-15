@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/shareBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:drawable/ic_menu_share"
+        app:layout_constraintBottom_toTopOf="@+id/keyTa"
+        app:layout_constraintEnd_toStartOf="@+id/copyBtn" />
+
     <EditText
         android:id="@+id/keyTa"
         android:layout_width="0dp"
@@ -74,10 +84,9 @@
         android:id="@+id/copyBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
         android:background="?attr/actionModeCopyDrawable"
-        app:layout_constraintBottom_toTopOf="@+id/keyTa"
+        app:layout_constraintBaseline_toBaselineOf="@+id/shareBtn"
         app:layout_constraintEnd_toStartOf="@+id/pasteBtn" />
 
     <Button
@@ -86,7 +95,7 @@
         android:layout_height="30dp"
         android:layout_marginEnd="16dp"
         android:background="?attr/actionModePasteDrawable"
-        app:layout_constraintBaseline_toBaselineOf="@id/copyBtn"
+        app:layout_constraintBaseline_toBaselineOf="@+id/shareBtn"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <View
